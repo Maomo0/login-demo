@@ -1,0 +1,41 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: auth-8000
+#          uri: lb://auth
+          uri: http://127.0.0.1:8000
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=2
+      globalcors:
+        cors-configurations:
+          '[**]':
+            allowedOrigins: '*'
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: '*'
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: gateway
+
+feign:
+  circuitbreaker:
+    enabled: true
