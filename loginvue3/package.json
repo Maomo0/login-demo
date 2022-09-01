@@ -1,0 +1,26 @@
+{
+  "name": "loginvue3",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
+    "ant-design-vue": "^3.2.11",
+    "axios": "^0.27.2",
+    "core-js": "^3.8.3",
+    "mitt": "^3.0.0",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.5",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.3",
+    "lib-flexible": "^0.3.2",
+    "vite": "^3.0.9"
+  }
+}
