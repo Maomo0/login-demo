@@ -1,17 +1,24 @@
 <template>
   <div>
-    menu
-    <component :is="name"/>
+    menu2
   </div>
 </template>
 
 <script>
-import {defineComponent, ref} from "vue";
+import {defineComponent, ref, onMounted, watch} from "vue";
+import {useRouter} from "vue-router";
 export default defineComponent({
   setup () {
     let name = ref("UserOutlined");
+    let router = useRouter();
+    let routerName = ref(router.currentRoute.value.name);
+    onMounted(()=>{
+      routerName = router.currentRoute.value.name;
+    })
+
     return {
       name,
+      routerName
     }
   }
 })

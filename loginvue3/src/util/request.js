@@ -25,17 +25,16 @@ service.interceptors.request.use((config)=>{
     return config
 })
 // 返回正常的响应码200不会执行
-const err = (error=>{
+const err = (async error=>{
     const data = error.response.data
     console.log("err", data)
     if (data){
         if (data.code === 401){
-            store.dispatch("logout").then(()=>{
-
-            })
+            message.error(data.message)
+            await store.dispatch("logout");
         }
         if (data.code === 500) {
-            message.error("服务异常!");
+            await message.error("服务异常!");
         }
     }
     return Promise.reject(error)

@@ -1,4 +1,5 @@
 import {SID, TOKEN} from "/@/util/finalName";
+import store from "/@/vuex/store";
 
 export const getToken = ()=>{
     return sessionStorage.getItem(TOKEN)
@@ -12,5 +13,14 @@ export const getSignAndTokenStatus = ()=>{
 }
 export const getUserName = ()=>{
     return sessionStorage.getItem("username");
+}
+
+const hasPermission = (auth) =>{
+    let permission = store.state.userAuth;
+    return permission.includes(auth)
+}
+
+export {
+    hasPermission
 }
 

@@ -23,7 +23,6 @@ export default defineComponent({
     const {proxy} = getCurrentInstance();
     const handleIconClick = () => {
       flag.value = !flag.value;
-      console.log("click", flag.value)
       proxy.$bus.emit("updateCollapsed", flag.value);
     }
 
@@ -37,22 +36,6 @@ export default defineComponent({
   },
 })
 
-// export default {
-//   name: 'IndexHeader',
-//   data () {
-//     return {
-//       flag: false
-//     }
-//   },
-//   methods: {
-//     handleIconClick(){
-//       this.flag = !this.flag
-//       this.$bus.$emit("updateCollapsed", this.flag)
-//     }
-//   },
-//   mounted() {
-//   }
-// }
 </script>
 
 <style scoped>

@@ -11,7 +11,6 @@
             autocomplete="off"
             @finish="onFinish"
             @finishFailed="onFinishFailed"
-            @validate="validateForm"
         >
           <a-form-item
               label="Username"
@@ -40,11 +39,12 @@
 
 <script>
 import { reactive, defineComponent } from 'vue';
-import {useStore} from "vuex";
 import {loginFetch} from "/@/util/api";
-import {useRouter} from "vue-router";
 import {SET_USERNAME} from "/@/vuex/mutation-types";
 import {SID, TOKEN} from "/@/util/finalName";
+import store from "/@/vuex/store";
+import router from "/@/router/index"
+
 export default defineComponent({
   name: 'LoginFrom',
   setup () {
@@ -52,12 +52,9 @@ export default defineComponent({
       formState,
       onFinish,
       onFinishFailed,
-      validateForm,
     }
   }
 })
-const store = useStore();
-const router = useRouter();
 let formState = reactive({
   username: '',
   password: '',
@@ -69,7 +66,6 @@ const onFinish = async values => {
   const res = await loginFetch(values)
   if (res.code === 200){
     if (res.data) {
-      let map = new Map();
       sessionStorage.setItem(TOKEN, res.data.token)
       sessionStorage.setItem(SID, res.data.sid)
       sessionStorage.setItem("username", values.username)
@@ -87,10 +83,6 @@ const onFinish = async values => {
 const onFinishFailed = errorInfo => {
   console.log('Failed:', errorInfo);
 };
-const validateForm = (name, status, errMsg)=>{
-
-}
-
 
 </script>
 

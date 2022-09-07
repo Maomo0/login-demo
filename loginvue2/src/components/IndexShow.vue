@@ -6,7 +6,6 @@
 <!--      <router-view ref="content">-->
       <router-view>
         <IndexContent />
-
       </router-view>
 <!--      </router-view>-->
     </a-layout>

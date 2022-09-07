@@ -1,24 +1,20 @@
 <template>
     <router-view/>
 </template>
-<script >
-import {defineComponent, onMounted} from "vue";
-import LoginForm from "/@/components/LoginForm";
-import IndexShow from "/@/components/IndexShow";
-import {useRouter} from "vue-router";
-export default defineComponent({
-  name: 'App',
-  components: {
-    LoginForm,
-    IndexShow
-  },
-  setup () {
-    const router = useRouter();
+<script setup>
+import {onBeforeMount} from "vue";
+import {tryLoginInfo} from "/@/util/api";
+import store from "/@/vuex/store";
 
-    onMounted(()=>{
-      console.log(router.currentRoute.value)
-    })
+const tryInfo = async ()=>{
+  const res = await tryLoginInfo();
+  if (res && res.code === 200) {
+    await store.dispatch("setAuthMenu", res.data)
   }
+}
+
+onBeforeMount(()=>{
+  tryInfo();
 })
 
 </script>
