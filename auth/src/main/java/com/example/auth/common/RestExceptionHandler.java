@@ -44,20 +44,23 @@ public class RestExceptionHandler {
         LOGGER.error("AuthenticationException 异常处理器");
         e.printStackTrace();
         ServletResponseUtils.responseError(response, e.getMessage(), 401);
-//        return new Result(401, e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
-    public Result exceptionHandler(Exception e){
+    public void exceptionHandler(Exception e, ServletResponse response){
+        LOGGER.error(e.getMessage());
         e.printStackTrace();
-        return new Result(500, e.getMessage());
+        ServletResponseUtils.responseError(response, "服务异常！", 500);
     }
     @ExceptionHandler(JWTDecodeException.class)
     public void decodeException(JWTDecodeException e,ServletResponse response){
+        LOGGER.error(e.getMessage());
+        e.printStackTrace();
         ServletResponseUtils.responseError(response, e.getMessage(), 500);
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public void validException(MethodArgumentNotValidException e, ServletResponse response){
+        LOGGER.error("参数异常!");
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
         String message = allErrors.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(";"));
         ServletResponseUtils.responseError(response, message, 500);

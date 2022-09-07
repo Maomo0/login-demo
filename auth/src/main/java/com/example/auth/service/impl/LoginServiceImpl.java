@@ -1,6 +1,5 @@
 package com.example.auth.service.impl;
 
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.auth.common.CommonVal;
